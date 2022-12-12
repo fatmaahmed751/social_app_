@@ -1,4 +1,6 @@
 import 'package:equatable/equatable.dart';
+import 'package:social_app/data/social_models/social_register_model.dart';
+import 'package:social_app/data/social_models/userlogin.dart';
 
 abstract class SocialEvents extends Equatable{
 
@@ -6,6 +8,12 @@ abstract class SocialEvents extends Equatable{
 
   List<Object?> get props =>[];
 }
-class SocialLoginEvent extends SocialEvents{}
+class SocialLoginEvent extends SocialEvents{
+  final UserLogin userLogin;
+  SocialLoginEvent(this.userLogin);
+}
 
-class SocialRegisterEvent extends SocialEvents{}
+class SocialRegisterEvent extends SocialEvents{
+  final SocialRegisterModel socialRegisterModel;
+  SocialRegisterEvent(this.socialRegisterModel);
+}

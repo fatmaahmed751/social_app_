@@ -1,17 +1,17 @@
 import 'package:equatable/equatable.dart';
 
 class UserData extends Equatable {
- final String? name;
- final  String? phone;
- final String? email;
- final String? password;
+ final String name;
+ final  String phone;
+ final String email;
+ final String password;
 
 
   const UserData({
-    this.name,
-    this.phone,
-    this.email,
-    this.password,
+   required this.name,
+  required  this.phone,
+   required this.email,
+  required  this.password,
 
   });
 

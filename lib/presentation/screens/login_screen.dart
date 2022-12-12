@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social_app/core/services/services_locator.dart';
 import 'package:social_app/presentation/controllers/bloc.dart';
 import 'package:social_app/presentation/controllers/events.dart';
 import 'package:social_app/presentation/controllers/social_login_bloc.dart';
@@ -17,12 +18,14 @@ class LoginScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return BlocProvider(
-      create: (context) => SocialLoginBloc()..add(SocialLoginEvent()),
+      create: (context) => SocialLoginBloc(sl()),
+        //..add(SocialLoginEvent(UserLogin(email:emailController.text,password: passwordController.text))),
       child: BlocConsumer<SocialLoginBloc, SocialStates>(
         listener: (context, state) {
 
         },
         builder: (context, state) {
+          SocialLoginBloc bloc = SocialLoginBloc.get(context);
           return Scaffold(
             appBar: AppBar(
               elevation: 0.0,
@@ -84,9 +87,8 @@ class LoginScreen extends StatelessWidget {
                       //color: Colors.deepOrange,
                       child: TextButton(
                         onPressed: () {
-
+                          bloc.add(SocialLoginEvent(UserLogin(email:emailController.text,password: passwordController.text)));
                           print(emailController.text);
-                          print(passwordController.text);
                         }, child: const Text('LOGIN',
                         style: TextStyle(
                             color: Colors.white

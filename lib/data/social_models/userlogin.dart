@@ -3,5 +3,5 @@ class UserLogin{
  late String email;
  late String password;
 
- UserLogin( this.email, this.password);
+ UserLogin({required this.email,required this.password});
 }

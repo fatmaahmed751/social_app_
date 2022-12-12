@@ -1,34 +1,23 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:social_app/core/utils/enum.dart';
 import 'package:social_app/data/social_models/social_register_model.dart';
+import 'package:social_app/domain/use_cases/social_register_usecase.dart';
 import 'package:social_app/presentation/controllers/events.dart';
+import 'package:social_app/presentation/controllers/states.dart';
 
-import 'package:social_app/presentation/controllers/social_register_states.dart';
+class SocialRegisterBloc extends Bloc<SocialRegisterEvent,SocialStates> {
+  final GetSocialRegisterUseCase getSocialRegisterUseCase;
+  static SocialRegisterBloc get(context)=>BlocProvider.of(context);
+  SocialRegisterBloc(this.getSocialRegisterUseCase):super(const SocialStates()){
+    on<SocialRegisterEvent>((event, emit)async {
 
-class SocialRegisterBloc extends Bloc<SocialRegisterEvent,SocialRegisterStates> {
-  SocialRegisterBloc() :super(SocialRegisterInitialState()) {
-    //static SocialRegisterBloc get(context)=>BlocProvider.of(context);
-
-    on<SocialRegisterEvent>((event, emit) {
-      emit(SocialRegisterLoadingState());
+      final result=  await getSocialRegisterUseCase.execute(event.socialRegisterModel);
+      emit( const SocialStates(socialRegisterState:RequestState.loaded));
+      print(result);
+      print(state);
     });
-    /*void UserRegister({
-
-      required String name,
-      required String phone,
-      required String email,
-      required String password,
-    }) {
-     // emit(SocialRegisterLoadingState());
-
-      FirebaseAuth.instance.createUserWithEmailAndPassword(
-          email: email,
-          password: password).
-      then((value) {
-        emit(SocialRegisterSuccessState());
-      });
-    }
-  }*/
   }
+// static SocialLoginBloc get(context)=>BlocProvider.of(context);
 }

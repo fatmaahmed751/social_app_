@@ -1,5 +1,6 @@
 import 'package:social_app/data/social_data_source/social_remote_data_source.dart';
 import 'package:social_app/data/social_models/social_login_model.dart';
+import 'package:social_app/data/social_models/social_register_model.dart';
 import 'package:social_app/domain/base_social_repository/base_social_repository.dart';
 import 'package:social_app/domain/entities/entities.dart';
 import 'package:social_app/data/social_models/userlogin.dart';
@@ -15,10 +16,9 @@ class SocialRepository extends BaseSocialRepository{
 
 
   @override
-  Future<UserData> getUserRegisterData() {
-    // TODO: implement getUserRegisterData
-    throw UnimplementedError();
-  }
+  Future<SocialRegisterModel> getUserRegisterData(SocialRegisterModel socialRegisterModel) async=>
+    baseSocialRemoteDataSource.getUserRegisterData(socialRegisterModel);
+
 
 
 
