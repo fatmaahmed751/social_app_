@@ -9,14 +9,17 @@ import 'package:social_app/presentation/controllers/states.dart';
 class SocialLoginBloc extends Bloc<SocialLoginEvent,SocialStates>{
 
 final GetSocialLoginUseCase getSocialLoginUseCase;
+//UserLogin userLogin;
+
 static SocialLoginBloc get(context)=>BlocProvider.of(context);
-  SocialLoginBloc(this.getSocialLoginUseCase):super(const SocialStates()){
+  SocialLoginBloc(this.getSocialLoginUseCase,):super(const SocialStates()){
     on<SocialLoginEvent>((event, emit)async {
 
    final result=  await getSocialLoginUseCase.execute(event.userLogin);
 emit(const SocialStates(socialLoginState:RequestState.loaded));
-   print(result);
-   print(state);
+   //print(result);
+  print(event.userLogin.uId);
+  // print(state);
     });
   }
  // static SocialLoginBloc get(context)=>BlocProvider.of(context);
