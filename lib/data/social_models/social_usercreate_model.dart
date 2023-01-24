@@ -3,7 +3,7 @@ class SocialCreateUser{
   late String email;
   late String phone;
    String? uId;
-  late bool isEmailVerified;
+ late  bool isEmailVerified;
 
   SocialCreateUser({
     required this.name,
@@ -28,7 +28,6 @@ class SocialCreateUser{
       'name':name,
       'email':email,
       'phone':phone,
-      'uId':uId,
       'isEmailVerified':isEmailVerified,
     };
   }

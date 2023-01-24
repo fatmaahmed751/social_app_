@@ -3,9 +3,9 @@ import 'package:social_app/core/network/error_message_model.dart';
 
 class ServerException implements Exception{
 
- // final ErrorMessageModel errorMessageModel;
+ final String message;
 
-//   const ServerException( this.errorMessageModel);
+ const ServerException({required this.message});
 
 }
 

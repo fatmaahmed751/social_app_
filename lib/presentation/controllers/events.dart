@@ -11,7 +11,6 @@ abstract class SocialEvents extends Equatable{
 }
 class SocialLoginEvent extends SocialEvents{
   final UserLogin userLogin;
-
   SocialLoginEvent(this.userLogin);
 }
 
@@ -25,4 +24,9 @@ class SocialRegisterEvent extends SocialEvents{
 class SocialUserCreateEvent extends SocialEvents{
   final SocialCreateUser socialCreateUser;
   SocialUserCreateEvent(this.socialCreateUser);
+}
+
+class GetSocialDataEvent extends SocialEvents{
+ final SocialCreateUser socialCreateUser;
+  GetSocialDataEvent(this.socialCreateUser);
 }

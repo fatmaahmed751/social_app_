@@ -8,4 +8,5 @@ abstract class BaseSocialRepository{
  Future <UserLogin>getUserLoginData(UserLogin userLogin);
  Future<SocialRegisterModel> getUserRegisterData(SocialRegisterModel socialRegisterModel);
  Future<SocialCreateUser> getUserCreated(SocialCreateUser socialCreateUser);
+ Future <SocialCreateUser>getSocialUserData(SocialCreateUser socialCreateUser);
 }

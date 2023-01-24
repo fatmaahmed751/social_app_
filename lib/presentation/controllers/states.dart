@@ -12,10 +12,16 @@ final String socialLoginMessage;
  final List<SocialRegisterModel>socialRegisterData;
  final RequestState socialRegisterState;
  final String socialRegisterMessage;
+ final List<UserLogin>getSocialData;
+ final RequestState getSocialDataState;
+ final String getSocialDataMessage;
  final List<SocialCreateUser>socialCreateUser;
  final RequestState socialCreateUserState;
  final String socialCreateUserMessage;
  const SocialStates({
+ this.getSocialData=const[],
+ this.getSocialDataState=RequestState.loading,
+ this.getSocialDataMessage='',
      this.socialCreateUser=const [],
      this.socialCreateUserState=RequestState.loading,
      this.socialCreateUserMessage='',
@@ -30,6 +36,7 @@ final String socialLoginMessage;
 
   @override
   List<Object?> get props => [
+    getSocialDataMessage,getSocialDataState,getSocialData,
     socialCreateUser,socialCreateUserState,socialCreateUserMessage,
     socialLoginData,socialLoginState,socialLoginMessage,
     socialRegisterData,socialRegisterState,socialRegisterMessage,

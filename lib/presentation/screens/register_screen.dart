@@ -7,11 +7,12 @@ import 'package:social_app/core/utils/enum.dart';
 import 'package:social_app/core/utils/enum.dart';
 import 'package:social_app/data/social_models/social_register_model.dart';
 import 'package:social_app/data/social_models/social_usercreate_model.dart';
-import 'package:social_app/presentation/controllers/bloc.dart';
+import 'package:social_app/presentation/controllers/social_bloc.dart';
 import 'package:social_app/presentation/controllers/events.dart';
 import 'package:social_app/presentation/controllers/social_register_bloc.dart';
 import 'package:social_app/presentation/controllers/states.dart';
 import 'package:social_app/presentation/controllers/states.dart';
+import 'package:social_app/presentation/screens/on_boarding_screen.dart';
 import 'package:social_app/presentation/screens/social_layout.dart';
 
 import '../../core/utils/enum.dart';
@@ -30,8 +31,8 @@ class RegisterScreen extends StatelessWidget {
       create: (context) => SocialRegisterBloc(sl()),
       child: BlocConsumer<SocialRegisterBloc, SocialStates>(
         listener: (context, state) {
-       if(state.socialCreateUserState==RequestState.loaded ){
-         Navigator.push(context, MaterialPageRoute(builder: (context)=>SocialLayout()
+       if(state.socialRegisterState==RequestState.loaded ){
+         Navigator.push(context, MaterialPageRoute(builder: (context)=>OnBoardingScreen()
          ));
        }
         },
@@ -59,7 +60,7 @@ class RegisterScreen extends StatelessWidget {
                   const SizedBox(height: 20.0,),
                   TextFormField(
                     controller: nameController,
-                    keyboardType: TextInputType.emailAddress,
+                    keyboardType: TextInputType.text,
                    /* onFieldSubmitted: (String value) {
                       print(value);
                     },
@@ -136,11 +137,11 @@ class RegisterScreen extends StatelessWidget {
                       print(value);
                     },*/
                     decoration: InputDecoration(
-                        hintText: 'phone',
+                        hintText: 'Phone',
                         hintStyle: TextStyle(
                             color: Colors.grey[500]
                         ),
-                        prefixIcon: const Icon(Icons.email_outlined),
+                        prefixIcon: const Icon(Icons.phone_sharp),
                         border: OutlineInputBorder(
                             borderRadius: BorderRadius.circular(5.0)
                         )

@@ -5,5 +5,6 @@ class UserLogin{
   String? uId;
 
 
- UserLogin({required this.email,required this.password,this.uId});
+ UserLogin({required this.email,required this.password,this.uId:''});
+
 }
