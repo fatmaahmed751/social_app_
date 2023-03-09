@@ -6,21 +6,19 @@ import 'package:social_app/domain/use_cases/social_login_usecase.dart';
 import 'package:social_app/presentation/controllers/events.dart';
 import 'package:social_app/presentation/controllers/states.dart';
 
-class SocialLoginBloc extends Bloc<SocialLoginEvent,SocialStates>{
+class SocialLoginBloc extends Bloc<SocialLoginEvent,SocialStates> {
 
-final GetSocialLoginUseCase getSocialLoginUseCase;
+  final GetSocialLoginUseCase getSocialLoginUseCase;
 
-static SocialLoginBloc get(context)=>BlocProvider.of(context);
+  static SocialLoginBloc get(context) => BlocProvider.of(context);
 
-  SocialLoginBloc(this.getSocialLoginUseCase,):super(const SocialStates()){
-    on<SocialLoginEvent>((event, emit)async {
+  SocialLoginBloc(this.getSocialLoginUseCase,) :super(const SocialStates()) {
+    on<SocialLoginEvent>((event, emit) async {
+      final result = await getSocialLoginUseCase.execute(event.userLogin);
+      emit(const SocialStates(socialLoginState: RequestState.loaded));
+      //print(result);
+      print(event.userLogin.uId);
 
-   final result=  await getSocialLoginUseCase.execute(event.userLogin);
-emit(const SocialStates(socialLoginState:RequestState.loaded));
-   //print(result);
-  print(event.userLogin.uId);
-  // print(state);
     });
   }
- // static SocialLoginBloc get(context)=>BlocProvider.of(context);
 }

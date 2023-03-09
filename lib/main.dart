@@ -1,8 +1,10 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/core/services/services_locator.dart';
 import 'package:social_app/core/utils/constants/bloc_observer.dart';
 import 'package:social_app/core/utils/constants/cache_helper.dart';
+import 'package:social_app/core/utils/constants/constants.dart';
 import 'package:social_app/core/utils/enum.dart';
 import 'package:social_app/firebase_options.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -25,29 +27,24 @@ void main()async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
-  await CacheHelper.init();
 
-  Widget widget;
-  uId=CacheHelper.getData(key: 'uId');
-
-
-  if(uId.isNotEmpty){
-    widget=SocialLayout();
-    print(uId);
-  }else{
-    widget=SocialLoginScreen();
-    print(uId);
-  }
-  runApp(MyApp(
-    startWidget:widget,
-  ));
+  runApp(MyApp());
 }
 
-class MyApp extends StatelessWidget {
- late Widget startWidget;
-    MyApp({required this.startWidget});
+class MyApp extends StatefulWidget {
 
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
 
+class _MyAppState extends State<MyApp> {
+
+   User? auth;
+  @override
+  void initState(){
+    super.initState();
+    auth=FirebaseAuth.instance.currentUser;
+  }
   @override
   Widget build(BuildContext context) {
     return MultiBlocProvider(
@@ -61,7 +58,8 @@ class MyApp extends StatelessWidget {
            builder: (context,state){
              return MaterialApp(
                  debugShowCheckedModeBanner: false,
-                 home:startWidget
+                 home:auth!=null?SocialLayout():const SocialLoginScreen(),
+
              );
            },
          ),

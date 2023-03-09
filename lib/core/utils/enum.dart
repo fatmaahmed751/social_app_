@@ -4,4 +4,3 @@ enum RequestState{
   error,
 }
 
-String uId='';

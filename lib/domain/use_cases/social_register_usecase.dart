@@ -7,8 +7,8 @@ class GetSocialRegisterUseCase {
 
   GetSocialRegisterUseCase(this.baseSocialRepository);
 
-  Future <SocialRegisterModel> execute(
-      SocialRegisterModel socialRegisterModel) {
-    return baseSocialRepository.getUserRegisterData(socialRegisterModel);
+  Future <SocialCreateUser> execute(
+      SocialCreateUser socialCreateUser) {
+    return baseSocialRepository.getUserRegisterData(socialCreateUser);
   }
 }

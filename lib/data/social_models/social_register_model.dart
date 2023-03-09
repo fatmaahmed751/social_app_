@@ -6,6 +6,6 @@ class SocialRegisterModel{
   late String email;
   late String password;
   SocialRegisterModel({
-      required this.name, required this.phone, required this.email, required this.password
+       this.name='',  this.phone='',  this.email='',  this.password=''
     });
 }

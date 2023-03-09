@@ -15,9 +15,8 @@ class SocialLoginEvent extends SocialEvents{
 }
 
 class SocialRegisterEvent extends SocialEvents{
-  final SocialRegisterModel socialRegisterModel;
-  //final  SocialCreateUser socialCreateUser;
-  SocialRegisterEvent(this.socialRegisterModel);
+  final SocialCreateUser socialCreateUser;
+  SocialRegisterEvent(this.socialCreateUser);
 }
 
 

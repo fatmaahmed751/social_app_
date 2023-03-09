@@ -2,9 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:social_app/core/services/services_locator.dart';
 import 'package:social_app/core/utils/enum.dart';
-import 'package:social_app/core/utils/enum.dart';
-import 'package:social_app/core/utils/enum.dart';
-import 'package:social_app/core/utils/enum.dart';
 import 'package:social_app/data/social_models/social_register_model.dart';
 import 'package:social_app/data/social_models/social_usercreate_model.dart';
 import 'package:social_app/presentation/controllers/social_bloc.dart';
@@ -61,12 +58,6 @@ class RegisterScreen extends StatelessWidget {
                   TextFormField(
                     controller: nameController,
                     keyboardType: TextInputType.text,
-                   /* onFieldSubmitted: (String value) {
-                      print(value);
-                    },
-                    onChanged: (String value) {
-                      print(value);
-                    },*/
                     decoration: InputDecoration(
                         hintText: 'User Name',
                         hintStyle: TextStyle(
@@ -84,12 +75,6 @@ class RegisterScreen extends StatelessWidget {
                   TextFormField(
                     controller: emailController,
                     keyboardType: TextInputType.emailAddress,
-                   /* onFieldSubmitted: (String value) {
-                      print(value);
-                    },
-                    onChanged: (String value) {
-                      print(value);
-                    },*/
                     decoration: InputDecoration(
                         hintText: 'Email Address',
                         hintStyle: TextStyle(
@@ -107,12 +92,6 @@ class RegisterScreen extends StatelessWidget {
                   TextFormField(
                     controller: passwordController,
                     keyboardType: TextInputType.visiblePassword,
-                   /* onFieldSubmitted: (String value) {
-                      print(value);
-                    },
-                    onChanged: (String value) {
-                      print(value);
-                    },*/
                     decoration: InputDecoration(
                         hintText: 'password',
                         hintStyle: TextStyle(
@@ -130,12 +109,6 @@ class RegisterScreen extends StatelessWidget {
                   TextFormField(
                     controller: phoneController,
                     keyboardType: TextInputType.phone,
-                    /*onFieldSubmitted: (String value) {
-                      print(value);
-                    },
-                    onChanged: (String value) {
-                      print(value);
-                    },*/
                     decoration: InputDecoration(
                         hintText: 'Phone',
                         hintStyle: TextStyle(
@@ -157,13 +130,13 @@ class RegisterScreen extends StatelessWidget {
                     //color: Colors.deepOrange,
                     child: TextButton(
                       onPressed: () {
-                        bloc.add(SocialRegisterEvent(SocialRegisterModel(
+                        bloc.add(SocialRegisterEvent(SocialCreateUser(
                             name: nameController.text,
                             phone: phoneController.text,
                             email: emailController.text,
-                            password: passwordController.text)));
-                         // SocialCreateUser(name: '', email: '', phone: '', uId: ''),
-
+                            bio:'',
+                            password: passwordController.text),),);
+                         debugPrint('useeeeeeeeeeeeeeeeeeeeeeer');
                       }, child: const Text('REGISTER',
                       style: TextStyle(
                           color: Colors.white

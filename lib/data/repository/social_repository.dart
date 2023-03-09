@@ -13,8 +13,8 @@ class SocialRepository extends BaseSocialRepository{
       baseSocialRemoteDataSource.getUserLoginData(userLogin);
 
   @override
-  Future<SocialRegisterModel> getUserRegisterData(SocialRegisterModel socialRegisterModel) async=>
-    baseSocialRemoteDataSource.getUserRegisterData(socialRegisterModel);
+  Future<SocialCreateUser> getUserRegisterData(SocialCreateUser socialCreateUser) async=>
+    baseSocialRemoteDataSource.getUserRegisterData(socialCreateUser);
 
   @override
   Future<SocialCreateUser> getUserCreated(SocialCreateUser socialCreateUser)async=>

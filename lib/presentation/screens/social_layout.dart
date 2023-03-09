@@ -7,6 +7,12 @@ import 'package:social_app/data/social_models/social_usercreate_model.dart';
 import 'package:social_app/presentation/controllers/events.dart';
 import 'package:social_app/presentation/controllers/social_bloc.dart';
 import 'package:social_app/presentation/controllers/states.dart';
+import 'package:social_app/presentation/screens/chats/chats_screen.dart';
+import 'package:social_app/presentation/screens/feeds/feeds_screen.dart';
+import 'package:social_app/presentation/screens/new_post/new_post_screen.dart';
+import 'package:social_app/presentation/screens/search/search_screen.dart';
+import 'package:social_app/presentation/screens/settings/settingsScreen.dart';
+import 'package:social_app/presentation/screens/users/users_screen.dart';
 
 class SocialLayout extends StatefulWidget {
   @override
@@ -14,12 +20,6 @@ class SocialLayout extends StatefulWidget {
 }
 
 class _SocialLayoutState extends State<SocialLayout> {
-  SocialCreateUser socialCreateUser=SocialCreateUser(
-      name: '',
-      email: '',
-      phone: '',
-      uId: '',
-      isEmailVerified: false);
   late SocialBloc bloc;
 
   @override
@@ -30,41 +30,140 @@ class _SocialLayoutState extends State<SocialLayout> {
 
   @override
   Widget build(BuildContext context) {
-
     return BlocConsumer<SocialBloc, SocialStates>(
       listener: (context, state) {
+        if(state is SocialNewPostState){
+          Navigator.push(context,
+              MaterialPageRoute(builder:(context)=>NewPostScreen(),
+              ),
+          );
+        }
 
       },
       builder: (context, state) {
-        SocialBloc  bloc= SocialBloc.get(context);
+        SocialBloc bloc = SocialBloc.get(context);
         return Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
-            title: Text('News Feed',
-            textAlign: TextAlign.start,
-            style: TextStyle(
-            fontSize: 35.0,
-            fontWeight: FontWeight.w700,
-            ),),
+            title:  Text(
+              bloc.titles[bloc.currentIndex],
+              textAlign: TextAlign.left,
+              style: const TextStyle(
+                fontSize: 20.0,
+                fontWeight: FontWeight.w400,
+                color: Colors.black
+              ),
+            ),
             elevation: 0.0,
             backgroundColor: Colors.white,
+            actions:[
+              CircleAvatar(
+                backgroundColor: Colors.grey[200],
+                child: IconButton(icon:const Icon(Icons.notifications_none,
+                color: Colors.black,
+                  size: 22.0,),
+                    onPressed:(){}),
+              ),
+              SizedBox(width: 9),
+              CircleAvatar(
+                radius: 21,
+                backgroundColor: Colors.grey[200],
+                child: IconButton(icon:const Icon(Icons.search_sharp,
+                size: 22.0,
+                color: Colors.black,),
+                    onPressed:(){}),
+              ),
+              SizedBox(width: 9),
+            ],
           ),
-          body: ConditionalBuilder(
-            condition:socialCreateUser.uId!=null ,
-            fallback: (BuildContext context) {
-              return const Center(child: CircularProgressIndicator());
+          body: bloc.screens[bloc.currentIndex],
+          bottomNavigationBar: BottomNavigationBar(
+            type: BottomNavigationBarType.fixed,
+            selectedItemColor: Colors.blue,
+            elevation: 20.0,
+            unselectedItemColor: Colors.black87,
+            currentIndex: bloc.currentIndex,
+            onTap: (index) {
+              bloc.changeBottomNav(index);
             },
-            builder: (BuildContext context) {
+            items: [
+              BottomNavigationBarItem(
+                icon: IconButton(
+                  icon: const Icon(
+                    Icons.home,
+                    size: 17.0,
+                  ),
+                  onPressed: () {
+                     Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => const FeedsScreen (),));
+                  },
 
-              return Column(
-                children: [
+                ),
+                label: 'Home',
+              ),
+              BottomNavigationBarItem(
+                icon: IconButton(
+                  icon: const Icon(
+                    Icons.chat_outlined,
+                    size: 17.0,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const ChatsScreen(),
+                        ));
+                  },
+                ),
+                label: 'Chats',
+              ),
+              BottomNavigationBarItem(
+                icon: IconButton(
+                  icon: const Icon(
+                    Icons.paste_rounded,
+                    size: 17.0,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) =>  NewPostScreen(),
+                        ));
+                  },
+                ),
+                label: 'Post',
+              ),
+              BottomNavigationBarItem(
+                  icon: IconButton(
+                icon: const Icon(
+                  Icons.perm_identity,
+                  size: 17.0,
+                ),
+                onPressed: () {
 
-                ],
-              );
-            },
-
+           Navigator.push(context, MaterialPageRoute(
+            builder: (context) => const UsersScreen()));
+                },
+              ),
+                label: 'Users',
+              ),
+              BottomNavigationBarItem(
+                icon: IconButton(
+                  icon: const Icon(
+                    Icons.settings,
+                    size: 17.0,
+                  ),
+                  onPressed: () {
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) =>  SettingsScreen()));
+                  },
+                ),
+                label: 'Settings',
+              ),
+            ],
           ),
-
         );
       },
     );

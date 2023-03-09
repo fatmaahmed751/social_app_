@@ -4,5 +4,4 @@ class AuthServices{
 
   final FirebaseAuth auth=FirebaseAuth.instance;
 
-  String uId='';
 }

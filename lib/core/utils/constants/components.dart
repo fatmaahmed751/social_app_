@@ -35,3 +35,29 @@ Color chooseToastColor(ToastStates state) {
 
   return color;
 }
+
+Widget defaultAppBar({
+  required BuildContext context,
+  String title='',
+  List<Widget>?actions,
+})=> AppBar(
+  backgroundColor: Colors.white,
+  elevation: 0.0,
+  leading: IconButton(
+    color: Colors.black,
+    onPressed: (){
+      Navigator.pop(context);
+    },
+    icon:Icon((Icons.arrow_back_ios),
+      size: 20,
+    ),
+  ),
+  titleSpacing: 5.0,
+  title: Text(title,
+  style: TextStyle(
+    color: Colors.black,
+    fontSize: 17.0
+  ),),
+
+  actions: actions,
+);
